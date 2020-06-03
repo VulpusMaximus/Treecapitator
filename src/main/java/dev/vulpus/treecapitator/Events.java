@@ -1,6 +1,7 @@
 package dev.vulpus.treecapitator;
 
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -43,10 +44,13 @@ public class Events implements Listener {
                     Damageable meta = (Damageable) tool.getItemMeta();
                     int dur = tool.getType().getMaxDurability() - meta.getDamage();
                     if (logs.size() > dur) {
-                        logs = logs.subList(0, dur - 1);
+                        logs = logs.subList(0, dur);
                     }
                     meta.setDamage(meta.getDamage() + logs.size());
                     tool.setItemMeta((ItemMeta) meta);
+                    if (meta.getDamage() >= tool.getType().getMaxDurability()) {
+                        tool.setAmount(0);
+                    }
 
                 }
 
