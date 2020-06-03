@@ -1,0 +1,2 @@
+sneak-ignore: true # Don't chop trees if sneaking while breaking
+trees-have-leaves: false # Trees will only be felled if they have leaves, to avoid buildings being "felled"

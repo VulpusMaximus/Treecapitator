@@ -1,0 +1,11 @@
+name: Treecapitator
+version: ${project.version}
+main: dev.vulpus.treecapitator.Treecapitator
+api-version: 1.13
+author: VulpusMaximus
+description: A plugin allowing players to fell entire trees in one go with an axe.
+website: vulpus.dev
+permissions:
+  treecapitator.fell:
+    description: Allows you to fell a tree with an axe
+    default: true
