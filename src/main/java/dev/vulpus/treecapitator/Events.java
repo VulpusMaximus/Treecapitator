@@ -38,18 +38,21 @@ public class Events implements Listener {
             List<Block> logs = m.getLogs(block.getLocation(), type);
             if (!config.getBoolean("trees-have-leaves", config.getDefaults().getBoolean("trees-have-leaves")) || m.hasLeaves(logs, type.substring(0, type.length() - 4) + "_LEAVES")) {
 
-                Damageable meta = (Damageable) tool.getItemMeta();
-                int dur = tool.getType().getMaxDurability() - meta.getDamage();
-                if (logs.size() > dur) {
-                    logs = logs.subList(0, dur - 1);
+                if (config.getBoolean("damage-per-block", config.getDefaults().getBoolean("damage-per-block"))) {
+
+                    Damageable meta = (Damageable) tool.getItemMeta();
+                    int dur = tool.getType().getMaxDurability() - meta.getDamage();
+                    if (logs.size() > dur) {
+                        logs = logs.subList(0, dur - 1);
+                    }
+                    meta.setDamage(meta.getDamage() + logs.size());
+                    tool.setItemMeta((ItemMeta) meta);
+
                 }
 
                 for (Block log : logs) {
                     log.breakNaturally();
                 }
-
-                meta.setDamage(meta.getDamage() + logs.size());
-                tool.setItemMeta((ItemMeta) meta);
 
             }
 
